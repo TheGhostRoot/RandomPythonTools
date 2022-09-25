@@ -377,6 +377,7 @@ def DDoS():
 
 setTargetIP()
 setSpoofIP()
+setSrcPort()
 setDstPort()
 setThreads()
 
