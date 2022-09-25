@@ -13,7 +13,7 @@ except ImportError:
     if sys.platform.startswith("win"):
         os.system("python -m pip install scapy")
     elif sys.platform.startswith("linux") or sys.platform.startswith("termux"):
-        os.system("python3 -m pip install capy")
+        os.system("python3 -m pip install scapy")
     try:
         from scapy.layers.dns import DNS
         from scapy.packet import Raw
