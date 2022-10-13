@@ -45,6 +45,8 @@ while True:
             if gui == "y" or gui == "yes":
                 G = True
                 break
+            else:
+                break
     except ImportError:
         print("Exiting..")
         exit()
@@ -115,8 +117,9 @@ else:
                         YouTube(url).streams.get_highest_resolution().download(output_path=p)
                         end_time = time.time()
                     else:
+                        vTitle = YouTube(url).streams.get_audio_only().title
                         start_time = time.time()
-                        YouTube(url).streams.get_highest_resolution().download(output_path=p)
+                        YouTube(url).streams.get_audio_only().download(output_path=p, filename=vTitle + ".mp3")
                         end_time = time.time()
                     print("Downloaded!")
                     print("Total time taken: {} seconds".format(round(end_time - start_time, 3)))
