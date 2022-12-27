@@ -22,4 +22,5 @@ for p in paragraphs:
     # Print the text of the paragraph
     print(p.text)
     file.write(p.text+'\n')
-    file.close()
+    
+file.close()
