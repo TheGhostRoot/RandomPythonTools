@@ -197,7 +197,6 @@ def getLang():
 
 def trans():
     global outputFile, translator2, timeoutMessage, mt
-    print(mt.translate('Hello', source=dlt.lang.ENGLISH, target=dlt.lang.BULGARIAN))
     langKey = getLang()
     if isTheFileConfig:
         # The file IS CONFIG
