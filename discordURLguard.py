@@ -57,8 +57,7 @@ for char in logo:
 print(logo)
 
 while True:
-    # token = input(" [<?>} Enter the token of the account you want to protect >> ")
-    token = "NjM2OTUwOTYyMjQ1NzMwMzI0.GdAqZS.Kf8reauzGeWsu-AVEtqOR_GkjWgT_WgrWUb210"
+    token = input(" [<?>} Enter the token of the account you want to protect >> ")
     if token != "":
         try:
             Header = {'Content-Type': 'application/json', 'authorization': token}
