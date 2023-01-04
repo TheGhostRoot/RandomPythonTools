@@ -226,7 +226,7 @@ def trans(fileName: str, saveName: str, translateToAllLangs: bool, langInd: int)
                     writeToFile(saveName, '')
                     #saveFile.write("\n")
             #saveFile.close()
-            print("Done")
+            print("Done with", saveName)
 
 
 def Extract(fileName: str, saveName: str):
