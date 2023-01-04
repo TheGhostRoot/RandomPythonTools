@@ -265,36 +265,10 @@ if __name__ == '__main__':
                 "Enter the names of the files in witch the extracted text is going to be saved as (ex: text.txt,text1.txt): ")
             if extractedFileNames != '':
                 extractedFileNames = extractedFileNames.split(',') if ',' in extractedFileNames else extractedFileNames
-                if type(extractedFileNames) == str and type(subs) != str:
-                    print("You need more extracted file names")
-                    continue
-                elif type(extractedFileNames) != str and type(subs) == str:
-                    print("You need more .ass names")
-                    continue
-                elif type(extractedFileNames) == list and type(subs) == list:
-                    if len(extractedFileNames) < len(subs):
-                        print("You need more extracted file names")
-                        continue
-                    else:
-                        print("You need more .ass names")
-                        continue
                 print()
                 transFileNames = input(
                     "Enter the names of the files in witch the translated text is going to be saved as (ex: text.txt,text1.txt): ")
                 if transFileNames != '':
-                    if type(transFileNames) == str and type(subs) != str:
-                        print("You need more translate file names")
-                        continue
-                    elif type(transFileNames) != str and type(subs) == str:
-                        print("You need more .ass names")
-                        continue
-                    elif type(transFileNames) == list and type(subs) == list:
-                        if len(transFileNames) < len(subs):
-                            print("You need more translate file names")
-                            continue
-                        else:
-                            print("You need more .ass names")
-                            continue
                     transFileNames = transFileNames.split(
                         ',') if ',' in transFileNames else transFileNames
                     print()
