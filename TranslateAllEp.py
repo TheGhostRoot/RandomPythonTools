@@ -197,11 +197,11 @@ def trans(fileName: str, saveName: str, translateToAllLangs: bool, langInd: int)
                                 t = l if l.isdigit() or l.isdecimal() else mt.translate(l, source=languages.get(langdetect.detect(l)).capitalize(), target=languages.get(key).capitalize())
                         if "„" in t:
                             t = t.replace("„", '"')
-                        writeToFile(saveName1, t+'\n')
+                        writeToFile(saveName1, t)
                         #saveFile.write(t + "\n")
                         print(l + " -> " + t)
                     else:
-                        writeToFile(saveName1, '\n')
+                        writeToFile(saveName1, '')
                         #saveFile.write("\n")
                 #saveFile.close()
                 print(saveName + " is done.")
@@ -219,11 +219,11 @@ def trans(fileName: str, saveName: str, translateToAllLangs: bool, langInd: int)
                             t = l if l.isdigit() or l.isdecimal() else mt.translate(l, source=languages.get(langdetect.detect(l)).capitalize(), target=languages.get(langKey).capitalize())
                     if "„" in t:
                         t = t.replace("„", '"')
-                    writeToFile(saveName, t + '\n')
+                    writeToFile(saveName, t)
                     #saveFile.write(t + "\n")
                     print(l + " -> " + t)
                 else:
-                    writeToFile(saveName, '\n')
+                    writeToFile(saveName, '')
                     #saveFile.write("\n")
             #saveFile.close()
             print("Done")
@@ -231,11 +231,12 @@ def trans(fileName: str, saveName: str, translateToAllLangs: bool, langInd: int)
 
 def Extract(fileName: str, saveName: str):
     subs = pysubs2.load(fileName, encoding="utf-8", errors='ignore')
-    textFile = open(saveName, 'a', encoding="utf-8")
+    #textFile = open(saveName, 'a', encoding="utf-8")
     for line in subs:
         print(line.text)
-        textFile.write(line.text + '\n')
-    textFile.close()
+        #textFile.write(line.text + '\n')
+        writeToFile(saveName, line.text)
+    #textFile.close()
     print('Extracted all text')
 
 
