@@ -6,10 +6,8 @@ try:
     import dl_translate as dlt
     import langdetect
 except ImportError:
-    if os.name.startswith('win'):
-        os.system("python -m pip install google-translate.py deep_translator dl-translate langdetect")
-    else:
-        os.system("python3 -m pip install google-translate.py deep_translator dl-translate langdetect")
+    os.system("python -m pip install google-translate.py deep_translator dl-translate langdetect")
+    os.system("python3 -m pip install google-translate.py deep_translator dl-translate langdetect")
     try:
         from google_translate_py import Translator
         import deep_translator as deep
@@ -206,6 +204,7 @@ def trans(outputFile, translator2, mt):
                                 t = word if word.isdigit() or word.isdecimal() else translator2.translate(text=word)
                             except Exception:
                                 t = word if word.isdigit() or word.isdecimal() else mt.translate(word, source=languages.get(langdetect.detect(word)).capitalize(), target=languages.get(key).capitalize())
+                        t = str(t)
                         if "„" in t:
                             t = t.replace("„", '"')
                         newLine = l.replace(word, t)
@@ -234,6 +233,7 @@ def trans(outputFile, translator2, mt):
                             t = word if word.isdigit() or word.isdecimal() else translator2.translate(text=word)
                         except Exception:
                             t = word if word.isdigit() or word.isdecimal() else mt.translate(word, source=languages.get(langdetect.detect(word)).capitalize(), target=languages.get(langKey).capitalize())
+                    t = str(t)
                     if "„" in t:
                         t = t.replace("„", '"')
                     newLine = l.replace(word, t)
@@ -276,6 +276,7 @@ def trans(outputFile, translator2, mt):
                                 t = l if l.isdigit() or l.isdecimal() else translator2.translate(text=l)
                             except Exception:
                                 t = l if l.isdigit() or l.isdecimal() else mt.translate(l, source=languages.get(langdetect.detect(l)).capitalize(), target=languages.get(key).capitalize())
+                        t = str(t)
                         if "„" in t:
                             t = t.replace("„", '"')
                         outputFile.write(t+"\n")
@@ -296,6 +297,7 @@ def trans(outputFile, translator2, mt):
                             t = l if l.isdigit() or l.isdecimal() else translator2.translate(text=l)
                         except Exception:
                             t = l if l.isdigit() or l.isdecimal() else mt.translate(l, source=languages.get(langdetect.detect(l)).capitalize(), target=languages.get(langKey).capitalize())
+                    t = str(t)
                     if "„" in t:
                         t = t.replace("„", '"')
                     outputFile.write(t+"\n")
