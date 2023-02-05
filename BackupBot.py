@@ -821,5 +821,4 @@ async def load_backup(ctx, guild_id):
 
 
 if __name__ == "__main__":
-    # Tic Tak Toe: OTYzMTA5ODM0NjE2NjE0OTEy.Gxxbwy.rI_Rakl0MBEj5rg59GFTB_abSOsR2tOzy8LOmI
-    bot.run("OTYzMTA5ODM0NjE2NjE0OTEy.Gxxbwy.rI_Rakl0MBEj5rg59GFTB_abSOsR2tOzy8LOmI")
+    bot.run("token")
