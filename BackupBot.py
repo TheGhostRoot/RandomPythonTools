@@ -174,7 +174,7 @@ async def add_categories(guild: discord.Guild):
                         "type_name": str(channel.type.name),
                         "type_value": channel.type.value,
                         "created_at": str(channel.created_at),
-                        "webhooks": str(webhook),
+                        "webhooks": {},
                         "is_nsfw": channel.is_nsfw(),
                         "topic": str(channel.topic) if channel.topic is not None else None,
                         "permissions": {}
@@ -187,7 +187,7 @@ async def add_categories(guild: discord.Guild):
                         "type_name": str(channel.type.name),
                         "type_value": channel.type.value,
                         "created_at": str(channel.created_at),
-                        "webhooks": str(webhook),
+                        "webhooks": {},
                         "is_news": channel.is_news(),
                         "is_nsfw": channel.is_nsfw(),
                         "topic": str(channel.topic) if channel.topic is not None else None,
@@ -195,6 +195,20 @@ async def add_categories(guild: discord.Guild):
                     }
                 if type(channel) is not discord.ForumChannel:
                     category_info["channels"][channel.id]["slowmode_delay"] = int(channel.slowmode_delay)
+                for web in webhook:
+                    category_info["channels"][channel.id]["webhooks"][web.id] = {
+                        "name": web.name,
+                        "url": str(web.url),
+                        "created_at": str(web.created_at),
+                        "channel_id": web.channel_id,
+                        "avatar_url": str(web.avatar.url) if web.avatar is not None else None,
+                        "token": str(web.token) if web.token is not None else None,
+                        "auth_token": str(web.auth_token) if web.auth_token is not None else None,
+                        "is_authenticated": web.is_authenticated(),
+                        "is_partial": web.is_partial(),
+                        "proxy": str(web.proxy) if web.proxy is not None else None,
+                        "proxy_auth": str(web.proxy_auth) if web.proxy_auth is not None else None
+                    }
             else:
                 category_info["channels"][channel.id]["bitrate"] = int(channel.bitrate)
                 category_info["channels"][channel.id]["user_limit"] = int(channel.user_limit)
@@ -544,8 +558,7 @@ async def load_categories(guild: discord.Guild, server_backup: dict):
 
         for channel_id, channel_data in category_data["channels"].items():
             channel_type = channel_data['type_name']
-            channel_type_value = int(channel_data['type_value'])
-            # channel_news = bool(channel_data['is_news'])
+
             try:
                 channel_nsfw = bool(channel_data['is_nsfw'])
             except Exception:
@@ -645,6 +658,7 @@ async def load_categories(guild: discord.Guild, server_backup: dict):
                             await channel_voice.set_permissions(target=r, overwrite=p)
                             time.sleep(1)
             else:
+                webhooks = dict(channel_data["webhooks"])
                 if len(overwrites2) < 99:
                     channel_text = await guild.create_text_channel(
                         name=channel_name,
@@ -660,7 +674,7 @@ async def load_categories(guild: discord.Guild, server_backup: dict):
                         name=channel_name,
                         category=category,
                         position=channel_position,
-                        # news=channel_news,
+                        #news=channel_news,
                         nsfw=channel_nsfw,
                         topic=channel_topic,
                         overwrites=perm_chunks2[0]
@@ -669,6 +683,11 @@ async def load_categories(guild: discord.Guild, server_backup: dict):
                         for r, p in over.items():
                             await channel_text.set_permissions(target=r, overwrite=p)
                             time.sleep(1)
+                for web_id, web_settings in webhooks.items():
+                        #iconr = requests.get(web_settings["avatar_url"])
+                        #icon = iconr.content
+                        await channel_text.create_webhook(name=web_settings["name"], avatar=web_settings["avatar_url"])
+                        time.sleep(1)
 
 
 async def load_backup_and_delete(guild: discord.Guild, server_backup: dict):
@@ -821,4 +840,4 @@ async def load_backup(ctx, guild_id):
 
 
 if __name__ == "__main__":
-    bot.run("token")
+    bot.run("Discord Bot")
