@@ -840,4 +840,4 @@ async def load_backup(ctx, guild_id):
 
 
 if __name__ == "__main__":
-    bot.run("Discord Bot")
+    bot.run("Bot token here")
