@@ -5,7 +5,8 @@
 start_port=9050
 port_step=10
 
-read -p "Enter number of Tor processes to start: " num_processes
+num_processes=$1
+#read -p "Enter number of Tor processes to start: " num_processes
 
 for (( i=0; i<num_processes; i++ )); do
     port=$(( start_port + i * port_step ))
