@@ -21,13 +21,13 @@ https = []
 sock4 = []
 sock5 = []
 if httpFileName != "":
-    http = [htt for htt in open(httpFileName, "rt")]
+    http = [htt.replace('\n', '') for htt in open(httpFileName, "rt")]
 if httpsFileName != "":
-    https = [htt1 for htt1 in open(httpsFileName, "rt")]
+    https = [htt1.replace('\n', '') for htt1 in open(httpsFileName, "rt")]
 if sock4FileName != "":
-    sock4 = [sock for sock in open(sock4FileName, "rt")]
+    sock4 = [sock.replace('\n', '') for sock in open(sock4FileName, "rt")]
 if sock5FileName != "":
-    sock5 = [sock2 for sock2 in open(sock5FileName, "rt")]
+    sock5 = [sock2.replace('\n', '') for sock2 in open(sock5FileName, "rt")]
 
 print("Proxies:")
 print("HTTP > "+str(len(http)))
