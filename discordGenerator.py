@@ -1,7 +1,7 @@
 import random
 import string
 import requests
-import time
+import threading
 
 char = string.ascii_letters + string.digits + "-" + "_"
 tokenAPI = "https://discordapp.com/api/v9/users/@me/library"
@@ -78,6 +78,11 @@ def generateNitro():
 
 
 use_proxies = input('[?] Do you want to use proxies? (Y)es / (N)o >> ').lower()
+while True:
+    amount_threads = input('[?] How many threads? 50: Ok | 100: a lot | 200: may crash your pc >> ')
+    if amount_threads != "" and amount_threads.isdigit():
+        amount_threads = int(amount_threads)
+        break
 use_proxies = True if use_proxies == "y" or use_proxies == 'yes' else False
 proxies = []
 proxy_type = None
@@ -103,13 +108,16 @@ if use_proxies:
             else:
                 proxy_type = 'http'
                 location = file_name
-            proxies = [{'http': proxy_type + '://' + line.replace('\n', ''), 'https': proxy_type + '://' + line.replace('\n', '')} for line in open('location', 'rt')]
+            proxies = [{'http': proxy_type + '://' + line.replace('\n', ''), 'https': proxy_type + '://' + line.replace('\n', '')} for line in open(location, 'rt')]
+            break
+
 
 while True:
     try:
-        generateNitro()
-        print()
-        generateToken()
+        for th in range(amount_threads):
+            threading.Thread(target=generateNitro, daemon=True).start()
+            #print()
+            threading.Thread(target=generateToken, daemon=True).start()
     except KeyboardInterrupt:
-        print("CTRL + C - Detected")
-        break
+            print("CTRL + C - Detected")
+            break
