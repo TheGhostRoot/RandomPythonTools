@@ -89,7 +89,7 @@ if use_proxies:
         file_name = input("[?] Proxies file location | .txt format expected! |\n"
                           "Example of the proxies in the file:\n"
                           " localhost:8080\n"
-                          " 123.156.89:443\n"
+                          " username:password@123.156.89:443\n"
                           " 141.51.133:80\n"
                           "You should also specify the type of the proxy by default it is HTTP\n"
                           "Example:\n"
