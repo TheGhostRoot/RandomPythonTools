@@ -37,7 +37,7 @@ print("SOCK5 > "+str(len(sock5)))
 print()
 
 url = "https://api.ipify.org"
-
+print('Checking HTTPS proxies')
 for h in https:
     prox = {
         "http": "https://"+h,
@@ -54,7 +54,7 @@ for h in https:
         file.write(res+'\n')
         file.close()
     print(res+" - http")
-print()
+print("Checking HTTP proxies")
 
 for h in http:
     prox = {
@@ -72,7 +72,7 @@ for h in http:
         file.write(res+'\n')
         file.close()
     print(res+" - http")
-print()
+print("Checking SOCKS5 proxies")
 for s5 in sock5:
     prox = {
         "http": "socks5://"+s5,
@@ -89,7 +89,7 @@ for s5 in sock5:
         file.write(res+"\n")
         file.close()
     print(res+" - sock5")
-print()
+print("Checking SOCKS4 proxies")
 for s4 in sock4:
     prox = {
         "http": "socks4://" + s4,
