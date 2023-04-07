@@ -21,7 +21,7 @@ https = []
 sock4 = []
 sock5 = []
 if httpFileName != "":
-    http = [htt.replace('\n', '') for htt in open(httpFileName, "rt")]
+    http = [htt.replace('\n', '') for htt in open(httpFileName, "rt") ]
 if httpsFileName != "":
     https = [htt1.replace('\n', '') for htt1 in open(httpsFileName, "rt")]
 if sock4FileName != "":
@@ -39,72 +39,51 @@ print()
 url = "https://api.ipify.org"
 print('Checking HTTPS proxies')
 for h in https:
-    prox = {
-        "http": "https://"+h,
-        "https": "https://"+h
-    }
-    working = False
     try:
-        res = requests.get(url, proxies=prox, timeout=10).text
-        working = True
+        requests.get(url, proxies={"http": "https://"+h, "https": "https://"+h}, timeout=10)
     except Exception:
         continue
-    if working:
+    else:
         file = open("httpsWorking.txt", "a")
-        file.write(res+'\n')
+        file.write(h+'\n')
         file.close()
-    print(res+" - http")
-print("Checking HTTP proxies")
+        print(h+" - http")
 
+print("Checking HTTP proxies")
 for h in http:
-    prox = {
-        "http": "http://"+h,
-        "https": "http://"+h
-    }
-    working = False
     try:
-        res = requests.get(url, proxies=prox, timeout=10).text
-        working = True
+        requests.get(url, proxies={"http": "http://"+h, "https": "http://"+h}, timeout=10)
     except Exception:
         continue
-    if working:
+    else:
         file = open("httpWorking.txt", "a")
-        file.write(res+'\n')
+        file.write(h+'\n')
         file.close()
-    print(res+" - http")
+        print(h+" - http")
+
 print("Checking SOCKS5 proxies")
 for s5 in sock5:
-    prox = {
-        "http": "socks5://"+s5,
-        "https": "socks5://" + s5
-    }
-    working = False
     try:
-        res = requests.get(url, proxies=prox, timeout=10).text
-        working = True
+        requests.get(url, proxies={"http": "socks5://"+s5, "https": "socks5://" + s5}, timeout=10)
     except Exception:
         continue
-    if working:
+    else:
         file = open("socks5Working.txt", "a")
-        file.write(res+"\n")
+        file.write(s5+"\n")
         file.close()
-    print(res+" - sock5")
+        print(s5+" - socks5")
+
 print("Checking SOCKS4 proxies")
 for s4 in sock4:
-    prox = {
-        "http": "socks4://" + s4,
-        "https": "socks4://" + s4
-    }
-    working = False
     try:
-        res = requests.get(url, proxies=prox, timeout=10).text
-        working = True
+        requests.get(url, proxies={"http": "socks4://" + s4, "https": "socks4://" + s4}, timeout=10)
     except Exception:
         continue
-    if working:
+    else:
         file = open("socks4Working.txt", "a")
-        file.write(res+"\n")
+        file.write(s4+"\n")
         file.close()
-    print(res+" - sock4")
+        print(s4+" - sock4")
 
 print("Done...")
+
