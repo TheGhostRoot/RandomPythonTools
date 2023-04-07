@@ -32,7 +32,6 @@ def checkToken(token):
             reqToken = requests.get(url=tokenAPI, headers=Header)
     else:
         reqToken = requests.get(url=tokenAPI, headers=Header)
-    reqToken.close()
     if reqToken.status_code == 404:
         print(f"Token: API is invalid: {tokenAPI}")
     elif reqToken.status_code == 429:
@@ -68,7 +67,6 @@ def generateNitro():
             urlNitro = requests.get(url=nitroAPI + nitro, timeout=20, headers=h)
     else:
         urlNitro = requests.get(url=nitroAPI + nitro, timeout=20, headers=h)
-    urlNitro.close()
     data = urlNitro.json()
     if urlNitro.status_code == 200:
         print(f'Nitro: Valid nitro - https://discord.gift/{nitro} - Request code 200')
@@ -105,10 +103,7 @@ if use_proxies:
             else:
                 proxy_type = 'http'
                 location = file_name
-            for line in open('location', 'rt'):
-                if '\n' in line:
-                    line = line.replace('\n', '')
-                proxies.append({'http': proxy_type + '://' + line, 'https': proxy_type + '://' + line})
+            proxies = [{'http': proxy_type + '://' + line.replace('\n', ''), 'https': proxy_type + '://' + line.replace('\n', '')} for line in open('location', 'rt')]
 
 while True:
     try:
