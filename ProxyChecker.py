@@ -40,7 +40,7 @@ url = "https://api.ipify.org"
 print('Checking HTTPS proxies')
 for h in https:
     try:
-        requests.get(url, proxies={"http": "https://"+h, "https": "https://"+h}, timeout=10)
+        requests.get(url, proxies={"http": "https://"+h, "https": "https://"+h}, timeout=5)
     except Exception:
         continue
     else:
@@ -52,7 +52,7 @@ for h in https:
 print("Checking HTTP proxies")
 for h in http:
     try:
-        requests.get(url, proxies={"http": "http://"+h, "https": "http://"+h}, timeout=10)
+        requests.get(url, proxies={"http": "http://"+h, "https": "http://"+h}, timeout=5)
     except Exception:
         continue
     else:
@@ -64,7 +64,7 @@ for h in http:
 print("Checking SOCKS5 proxies")
 for s5 in sock5:
     try:
-        requests.get(url, proxies={"http": "socks5://"+s5, "https": "socks5://" + s5}, timeout=10)
+        requests.get(url, proxies={"http": "socks5://"+s5, "https": "socks5://" + s5}, timeout=5)
     except Exception:
         continue
     else:
@@ -76,7 +76,7 @@ for s5 in sock5:
 print("Checking SOCKS4 proxies")
 for s4 in sock4:
     try:
-        requests.get(url, proxies={"http": "socks4://" + s4, "https": "socks4://" + s4}, timeout=10)
+        requests.get(url, proxies={"http": "socks4://" + s4, "https": "socks4://" + s4}, timeout=5)
     except Exception:
         continue
     else:
