@@ -1,9 +1,5 @@
 # RandomPythonTools
 
-https://github.com/TheGhostRoot/RandomPythonTools/graphs/traffic/
-
-<p align="center"> <a href="https://github.com/TheGhostRoot/RandomPythonTools/graphs/traffic/"><img src="https://github.com/TheGhostRoot/RandomPythonTools/graphs/traffic/" alt="downloads" /></a> </p>
-
 A few of my random tools I made for ONLY EDUCATIONAL PURPOSE and for nothing else. By downloading/using you agree that you won't use them for any malicious purposes.
 
 discordURLguard.py - may have some bugs
