@@ -8,7 +8,7 @@
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/TheGhostRoot/RandomPythonTools)
 ![Maintenance](https://img.shields.io/maintenance/yes/2022)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/TheGhostRoot/RandomPythonTools)
-![GitHub All Releases](https://img.shields.io/github/downloads/TheGhostRoot/RandomPythonTools)
+![GitHub All Releases](https://img.shields.io/github/downloads/TheGhostRoot/RandomPythonTools/total)
 
 A few of my random tools I made for ONLY EDUCATIONAL PURPOSE and for nothing else. By downloading/using you agree that you won't use them for any malicious purposes.
 
