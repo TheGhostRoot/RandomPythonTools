@@ -1,5 +1,15 @@
 # RandomPythonTools
 
+![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)
+![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)
+![author](https://svgshare.com/i/mg6.svg)
+
+![GitHub contributors](https://img.shields.io/github/contributors/TheGhostRoot/RandomPythonTools)
+![GitHub issues](https://img.shields.io/github/issues/TheGhostRoot/RandomPythonTools)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/TheGhostRoot/RandomPythonTools)
+![Maintenance](https://img.shields.io/maintenance/yes/2022)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/TheGhostRoot/RandomPythonTools)
+
 A few of my random tools I made for ONLY EDUCATIONAL PURPOSE and for nothing else. By downloading/using you agree that you won't use them for any malicious purposes.
 
 discordURLguard.py - may have some bugs
