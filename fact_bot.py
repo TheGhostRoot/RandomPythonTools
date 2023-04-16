@@ -5,7 +5,7 @@ import json
 from discord.ext import tasks, commands
 
 bot = commands.Bot(command_prefix='!!', bot=True, self_bot=False, intents=discord.Intents.all())
-TOKEN = 'Bot token'
+TOKEN = 'token here'
 FACT_API_URL = 'https://uselessfacts.jsph.pl/random.json?language=en'
 
 subscribed_users = set()
