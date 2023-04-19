@@ -686,7 +686,8 @@ async def load_categories(guild: discord.Guild, server_backup: dict):
                 for web_id, web_settings in webhooks.items():
                         #iconr = requests.get(web_settings["avatar_url"])
                         #icon = iconr.content
-                        await channel_text.create_webhook(name=web_settings["name"], avatar=web_settings["avatar_url"])
+                        #, avatar=web_settings["avatar_url"]
+                        await channel_text.create_webhook(name=web_settings["name"])
                         time.sleep(1)
 
 
