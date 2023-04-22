@@ -70,7 +70,7 @@ const intervalId = setInterval(() => {
     i++;
 }, 5000);
 
-intervalId.unref();  // Allow the script to exit even if the interval is still running.
+//intervalId.unref();  // Allow the script to exit even if the interval is still running.
 
 //login - Fired when the bot successfully logs in to the server.
 //spawn - Fired when the bot spawns in the world.
