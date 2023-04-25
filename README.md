@@ -13,9 +13,6 @@ A few of my random tools I made for ONLY EDUCATIONAL PURPOSE and for nothing els
 discordURLguard.py - may have some bugs
 
 
-HashTable.py - I copied it :)
-
-
 windowTraffic.... .py - copied and modified
 
 
