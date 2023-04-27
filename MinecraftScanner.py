@@ -9,7 +9,7 @@ except ImportError:
         if os.name.startswith("win"):
             os.system("python -m pip install minestat mctools mcrcon")
         else:
-            os.system("python3 -m pip install minestat")
+            os.system("python3 -m pip install minestat mctools mcrcon")
         try:
             import minestat
             import mcrcon
