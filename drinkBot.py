@@ -239,5 +239,5 @@ async def on_ready():
 
 
 if __name__ == "__main__":
-    bot.run("OTYzMTA5ODM0NjE2NjE0OTEy.GMpPFY.CLDTUXfeSdi0dRrVWXkwITobWw6U8Nl-0WwOTk")
+    bot.run("Token here")
 
