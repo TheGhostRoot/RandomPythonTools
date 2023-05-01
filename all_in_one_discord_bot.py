@@ -13,7 +13,7 @@ import minestat
 
 load_dotenv()
 
-bot = commands.Bot(command_prefix="??", self_bot=False, bot=True, intents=discord.Intents.all())
+bot = commands.Bot(command_prefix="??", intents=discord.Intents.all())
 client = discord.Client(intents=discord.Intents.all())
 
 bot.remove_command('help')
