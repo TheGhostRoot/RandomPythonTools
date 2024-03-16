@@ -1,9 +1,9 @@
 """
 from pynput.keyboard import Listener, Key, Controller
-
+#"l": [dd]
 isPrint = True
 hot_keys = {
-"l": ["o"],
+Key.
 Key.page_up: [Key.up, Key.down, Key.right, Key.left, Key.up]
 
 }
@@ -60,7 +60,7 @@ def on_press(key):
     global running
     if running:
         if isPrint:
-            print(key)
+            key_label.config(text=str(key))
         if key in hot_keys.keys():
             press_key(key)
         try:
@@ -96,6 +96,9 @@ stop_button.pack(pady=5)
 
 status_label = tk.Label(root, text="Stopped")
 status_label.pack(pady=5)
+
+key_label = tk.Label(root, text="")
+key_label.pack(pady=5)
 
 root.mainloop()
 
