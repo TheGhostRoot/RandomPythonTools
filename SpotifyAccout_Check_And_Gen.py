@@ -40,7 +40,9 @@ def generate():
     r = requests.post('https://spclient.wg.spotify.com/signup/public/v1/account/', headers=headers1, data=payload)
 
     if r.status_code==200:
-        #print(r.json())
+        print(r.json())
+        print(nick)
+        print(passw)
         if r.json()['status']==1:
             return (True, email+":"+passw)
         else:
